@@ -3,6 +3,8 @@ import { UniversidadeService } from './universidade.service';
 import { CreateUniversidadeDto } from './dto/create-universidade.dto';
 import { UpdateUniversidadeDto } from './dto/update-universidade.dto';
 
+
+
 @Controller('universidade')
 export class UniversidadeController {
   constructor(private readonly universidadeService: UniversidadeService) {}

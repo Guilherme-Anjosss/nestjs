@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCursoDto } from './dto/create-curso.dto';
 import { UpdateCursoDto } from './dto/update-curso.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CursoService {
-  create(createCursoDto: CreateCursoDto) {
-    return 'This action adds a new curso';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createcursoDto: CreateCursoDto) {
+    return await this.prisma.curso.create({
+      data: createcursoDto, // Corrigido: os dados devem estar dentro de um objeto `data`
+    });
   }
 
-  findAll() {
-    return `This action returns all curso`;
+  async findAll() {
+    return this.prisma.curso.findMany(); // Obtém todos os usuários
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} curso`;
+  async findOne(id: number) {
+    return this.prisma.curso.findUnique({
+      where: { id }, // Busca pelo ID
+    });
   }
 
-  update(id: number, updateCursoDto: UpdateCursoDto) {
-    return `This action updates a #${id} curso`;
+  async update(id: number, updatecursoDto: UpdateCursoDto) {
+    return this.prisma.curso.update({
+      where: { id }, // Encontra o usuário pelo ID
+      data: updatecursoDto, // Atualiza com os novos dados
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} curso`;
+  async remove(id: number) {
+    return this.prisma.curso.delete({
+      where: { id }, // Remove o usuário pelo ID
+    });
   }
 }
