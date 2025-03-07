@@ -7,7 +7,7 @@ export class CreateCursoDto {
 
   @IsNotEmpty()
   @Length(3, 255)
-  universidade_id: string;
+  universidade_id: number;
 
   @IsNotEmpty()
   @IsInt()
